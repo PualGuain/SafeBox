@@ -1,0 +1,8 @@
+User-agent: Baiduspider
+Allow: /
+
+User-agent: *
+Allow: /
+
+Sitemap: https://safebox-e1a.pages.dev/sitemap.xml
+Sitemap: https://safebox.dpdns.org/sitemap.xml
