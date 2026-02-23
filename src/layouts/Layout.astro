@@ -1,0 +1,44 @@
+---
+const { title = '保险柜解决方案', description = '企业与家庭级安全存储专家' } = Astro.props;
+---
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <link rel="canonical" href="https://safebox.example.com" />
+    <link rel="stylesheet" href="/styles/global.css" />
+  </head>
+  <body>
+    <header>
+      <div class="container" style="display:flex;align-items:center;justify-content:space-between;padding:14px 0;">
+        <a href="/" style="display:flex;gap:10px;align-items:center;">
+          <div style="width:28px;height:28px;border-radius:8px;background:var(--primary)"></div>
+          <strong>SafeBox 安全柜</strong>
+        </a>
+        <nav style="display:flex;gap:16px;">
+          <a href="/">首页</a>
+          <a href="/about">关于我们</a>
+          <a href="/faq">常见问题</a>
+        </nav>
+      </div>
+    </header>
+    <main>
+      <slot />
+    </main>
+    <footer>
+      <div class="container" style="padding:16px 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;">
+        <small>© {new Date().getFullYear()} SafeBox 安全柜</small>
+        <div style="display:flex;gap:12px;">
+          <a href="tel:400-000-0000" class="btn secondary">电话咨询：400-000-0000</a>
+          <a href="mailto:info@safebox.example.com" class="btn secondary">邮箱：info@safebox.example.com</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,27 @@
+---
+import Layout from '../layouts/Layout.astro';
+const faqs = [
+  { q: '支持哪些开锁方式？', a: '支持机械钥匙、电子密码与指纹组合，可按需启用双人双锁。' },
+  { q: '是否具备防火与防水能力？', a: '根据型号不同具备耐高温与密封防水设计，可保护纸质与电子介质。' },
+  { q: '如何选择合适的尺寸？', a: '结合存放物品体积、场地空间与承重条件，我们提供勘察与建议。' },
+  { q: '安装与维保如何进行？', a: '提供上门安装与使用培训，后续支持定期维保与紧急响应。' },
+];
+---
+<Layout title="常见问题｜SafeBox 安全柜" description="关于 SafeBox 的功能、安装与维保常见问题解答。">
+  <section class="section">
+    <div class="container">
+      <h1 class="section-title">常见问题</h1>
+      <div class="grid">
+        {faqs.map((item) => (
+          <div class="faq-item">
+            <h3>{item.q}</h3>
+            <p>{item.a}</p>
+          </div>
+        ))}
+      </div>
+      <div style="margin-top:18px;text-align:center;">
+        <a href="tel:400-000-0000" class="btn">更多问题，欢迎来电咨询</a>
+      </div>
+    </div>
+  </section>
+</Layout>
