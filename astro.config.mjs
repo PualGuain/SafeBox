@@ -2,6 +2,5 @@ import { defineConfig } from 'astro/config';
 
 export default defineConfig({
   output: 'static',
-  site: 'https://safebox.dpdns.org',
-  integrations: [],
+  site: 'https://example.com',
 });
