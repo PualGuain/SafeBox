@@ -219,22 +219,47 @@
             grid-template-columns: repeat(3, 1fr);
             gap: 16px;
         }
-        .product-grid .tile {
-            position: relative;
+        .product-grid.hidden {
+            display: none;
+        }
+        /* apply width limit globally in case scoped styles are stripped */
+        :global(.product-grid) {
             width: 100%;
-            padding-top: 66.666%;
+            /* match .container max-width so grid aligns with other sections */
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        .product-grid .tile {
+            width: 100%;
+            aspect-ratio: 3 / 2;
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            justify-content: flex-start;
             border-radius: 5px;
             border: 1px solid #c0c5cc;
-            background: #fff;
+            background-color: #fff;
             overflow: hidden;
         }
         .product-grid .tile img {
-            position: absolute;
-            left: 0;
-            top: 0;
+            /* place image above caption and limit its height so caption remains visible */
             width: 100%;
-            height: 100%;
+            height: auto;
+            max-height: calc(100% - 48px);
             object-fit: cover;
+            display: block;
+            flex: 1 1 auto;
+        }
+        .product-grid .tile .tile-caption {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 16px;
+            color: #22384f;
+            font-weight: 600;
+            padding: 6px 10px 12px;
+            background: #fff;
+            width: 100%;
+            box-sizing: border-box;
         }
         .product-list {
             display: grid;
@@ -674,7 +699,7 @@
     <section class="product" id="product">
         <div class="container">
             <div class="title">
-                <h2>核心产品</h2>
+                <h2 id="productTitle">核心产品 - 档案装具</h2>
                 <p>全系列密集架 满足不同场景存储需求</p>
             </div>
             <div class="product-categories">
@@ -682,13 +707,29 @@
                 <button class="category-btn" data-category="library">图书馆设备</button>
                 <button class="category-btn" data-category="other">其他</button>
             </div>
-            <div class="product-grid" id="productGrid">
-                <div class="tile"><img src="/images/archives-1.jpg" alt="档案装具1"></div>
-                <div class="tile"><img src="/images/archives-2.jpg" alt="档案装具2"></div>
-                <div class="tile"><img src="/images/archives-3.jpg" alt="档案装具3"></div>
-                <div class="tile"><img src="/images/archives-4.jpg" alt="档案装具4"></div>
-                <div class="tile"><img src="/images/archives-5.jpg" alt="档案装具5"></div>
-                <div class="tile"><img src="/images/archives-6.jpg" alt="档案装具6"></div>
+            <!-- separated grids for each category, only active one visible -->
+            <div class="product-grid" data-category="archives">
+                <div class="tile"><img src="/images/archives-1.jpg" alt="智能密集架"><div class="tile-caption">智能密集架</div></div>
+                <div class="tile"><img src="/images/archives-2.jpg" alt="战备密集架"><div class="tile-caption">战备密集架</div></div>
+                <div class="tile"><img src="/images/archives-3.jpg" alt="手动密集架"><div class="tile-caption">手动密集架</div></div>
+                <div class="tile"><img src="/images/archives-4.jpg" alt="无轨密集架"><div class="tile-caption">无轨密集架</div></div>
+                <div class="tile"><img src="/images/archives-5.jpg" alt="底图密集架"><div class="tile-caption">底图密集架</div></div>
+                <div class="tile"><img src="/images/archives-6.jpg" alt="防磁柜"><div class="tile-caption">防磁柜</div></div>
+            </div>
+            <div class="product-grid hidden" data-category="library">
+                <div class="tile"><img src="/images/library-1.jpg" alt="智能书架"><div class="tile-caption">智能书架</div></div>
+                <div class="tile"><img src="/images/library-2.jpg" alt="全钢书架"><div class="tile-caption">全钢书架</div></div>
+                <div class="tile"><img src="/images/library-3.jpg" alt="钢木书架"><div class="tile-caption">钢木书架</div></div>
+                <div class="tile"><img src="/images/library-4.jpg" alt="古籍书柜"><div class="tile-caption">古籍书柜</div></div>
+                <div class="tile"><img src="/images/library-5.jpg" alt="期刊架"><div class="tile-caption">期刊架</div></div>
+                <div class="tile"><img src="/images/library-6.jpg" alt="阅览桌椅"><div class="tile-caption">阅览桌椅</div></div>
+            </div>
+            <div class="product-grid hidden" data-category="other">
+                <div class="tile"><img src="/images/other-1.jpg" alt="钢制家具"><div class="tile-caption">钢制家具</div></div>
+                <div class="tile"><img src="/images/other-2.jpg" alt="仓储设备"><div class="tile-caption">仓储设备</div></div>
+                <div class="tile"><img src="/images/other-3.jpg" alt="博物馆设备"><div class="tile-caption">博物馆设备</div></div>
+                <div class="tile"><img src="/images/other-4.jpg" alt="医用设备"><div class="tile-caption">医用设备</div></div>
+                <div class="tile"><img src="/images/other-5.jpg" alt="办公家具"><div class="tile-caption">办公家具</div></div>
             </div>
         </div>
     </section>
@@ -1005,25 +1046,38 @@
                 sMarquee.addEventListener('touchend', function(){ setPlayState('running'); });
             }
             var catBtns = document.querySelectorAll('.category-btn');
-            var grid = document.getElementById('productGrid');
-            var imagesMap = {
-                archives: ['archives-1.jpg','archives-2.jpg','archives-3.jpg','archives-4.jpg','archives-5.jpg','archives-6.jpg'],
-                library: ['library-1.jpg','library-2.jpg','library-3.jpg','library-4.jpg','library-5.jpg','library-6.jpg'],
-                other: ['other-1.jpg','other-2.jpg','other-3.jpg','other-4.jpg','other-5.jpg','other-6.jpg']
-            };
-            var renderGrid = function(cat){
-                var imgs = imagesMap[cat] || [];
-                var html = imgs.map(function(n,i){ return '<div class=\"tile\"><img src=\"/images/'+n+'\" alt=\"'+cat+(i+1)+'\"></div>'; }).join('');
-                grid.innerHTML = html;
-            };
+            var grids = document.querySelectorAll('.product-grid');
+            var titleEl = document.getElementById('productTitle');
+
+            function updateTitle(cat) {
+                if (!titleEl) return;
+                var name = cat === 'archives' ? '档案装具' : cat === 'library' ? '图书馆设备' : '其他';
+                titleEl.textContent = '核心产品 - ' + name;
+            }
+
+            function showCategory(cat) {
+                grids.forEach(function(g){
+                    if (g.getAttribute('data-category') === cat) {
+                        g.classList.remove('hidden');
+                    } else {
+                        g.classList.add('hidden');
+                    }
+                });
+            }
+
             catBtns.forEach(function(btn){
                 btn.addEventListener('click', function(){
                     catBtns.forEach(function(b){ b.classList.remove('active'); });
                     btn.classList.add('active');
                     var cat = btn.getAttribute('data-category');
-                    renderGrid(cat);
+                    showCategory(cat);
+                    updateTitle(cat);
                 });
             });
+
+            // initialize
+            showCategory('archives');
+            updateTitle('archives');
             var consultBtn = document.querySelector('.banner-btn');
             if (consultBtn) {
                 consultBtn.addEventListener('click', function(e){
