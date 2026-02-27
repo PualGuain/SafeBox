@@ -359,7 +359,22 @@
             display: flex;
             gap: 16px;
             will-change: transform;
-            animation: strength-scroll-left 28s linear infinite;
+            /* animation applied per-row so that each can scroll independently */
+        }
+        .strength-track.row1 {
+            animation: strength-scroll-left1 28s linear infinite;
+        }
+        .strength-track.row2 {
+            /* move rightwards by animating positive translation */
+            animation: strength-scroll-right 30s linear infinite;
+        }
+        @keyframes strength-scroll-left1 {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100%); }
+        }
+        @keyframes strength-scroll-right {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(100%); }
         }
         .strength-rows {
             display: flex;
@@ -387,9 +402,23 @@
             transform: translateY(-5px);
         }
         .strength-card img {
-            width: 100%;
-            height: 180px;
             object-fit: cover;
+        }
+        /* horizontal images for first row */
+        .strength-track.row1 .strength-card img {
+            width: 300px;
+            height: 200px;
+        }
+        .strength-track.row1 .strength-card {
+            min-width: 320px;
+        }
+        /* vertical images for second row */
+        .strength-track.row2 .strength-card img {
+            width: 200px;
+            height: 300px;
+        }
+        .strength-track.row2 .strength-card {
+            min-width: 240px;
         }
         .strength-card p {
             padding: 12px;
@@ -417,36 +446,34 @@
             0% { transform: translateX(0%); }
             100% { transform: translateX(-50%); }
         }
-        .case-card {
+        .case-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill,minmax(220px,1fr));
+            gap: 24px;
+            padding: 20px 0;
+        }
+        .province {
             background: #fff;
-            border-radius: 5px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            border: 1px solid #e0e3e7;
-            overflow: hidden;
-            transition: transform 0.3s;
-            min-width: 320px;
-        }
-        .case-card:hover {
-            transform: translateY(-5px);
-        }
-        .case-card img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-        }
-        .case-card p {
-            padding: 15px;
-            font-size: 16px;
-            color: #333;
-            text-align: center;
-        }
-        .case-overview {
-            margin-top: 30px;
-        }
-        .case-overview img {
-            width: 100%;
             border-radius: 6px;
+            padding: 16px;
             border: 1px solid #e0e3e7;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .province h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #22384f;
+            border-bottom: 2px solid #00b4ff;
+            padding-bottom: 4px;
+        }
+        .province ul {
+            list-style: disc inside;
+            line-height: 1.6;
+            font-size: 14px;
+            color: #333;
+        }
+        .province ul li {
+            margin-bottom: 6px;
         }
         /* 服务承诺板块 */
         .service {
@@ -775,102 +802,176 @@
                 <div class="strength-rows">
                     <div class="strength-track row1">
                         <div class="strength-card">
-                            <img src="/images/cert1.jpg" alt="资质证书1">
-                            <p>国家高新技术企业证书</p>
-                        </div>
-                        <div class="strength-card">
-                            <img src="/images/cert2.jpg" alt="资质证书2">
-                            <p>ISO9001质量管理体系认证</p>
-                        </div>
-                        <div class="strength-card">
-                            <img src="/images/cert3.jpg" alt="资质证书3">
-                            <p>环境管理体系认证</p>
-                        </div>
-                        <div class="strength-card">
-                            <img src="/images/cert4.jpg" alt="资质证书4">
-                            <p>国家档案局定点生产企业</p>
-                        </div>
-                        <div class="strength-card">
-                            <img src="/images/cert5.jpg" alt="资质证书5">
+                            <img src="/images/cert-h1.jpg" alt="中国绿色环保产品">
                             <p>中国绿色环保产品</p>
                         </div>
                         <div class="strength-card">
-                            <img src="/images/cert6.jpg" alt="资质证书6">
-                            <p>政府采购合作单位</p>
+                            <img src="/images/cert-h2.jpg" alt="江西名牌产品证书">
+                            <p>江西名牌产品证书</p>
                         </div>
                         <div class="strength-card">
-                            <img src="/images/cert1.jpg" alt="资质证书1">
-                            <p>国家高新技术企业证书</p>
+                            <img src="/images/cert-h3.jpg" alt="绿色供应链评价证书">
+                            <p>绿色供应链评价证书</p>
                         </div>
                         <div class="strength-card">
-                            <img src="/images/cert2.jpg" alt="资质证书2">
-                            <p>ISO9001质量管理体系认证</p>
+                            <img src="/images/cert-h4.jpg" alt="中国图书馆协会企业单位会员">
+                            <p>中国图书馆协会企业单位会员</p>
                         </div>
                         <div class="strength-card">
-                            <img src="/images/cert3.jpg" alt="资质证书3">
-                            <p>环境管理体系认证</p>
+                            <img src="/images/cert-h5.jpg" alt="国家档案局定点生产企业认证">
+                            <p>国家档案局定点生产企业认证</p>
                         </div>
                         <div class="strength-card">
-                            <img src="/images/cert4.jpg" alt="资质证书4">
-                            <p>国家档案局定点生产企业</p>
+                            <img src="/images/cert-h6.jpg" alt="企业信用等级证书">
+                            <p>企业信用等级证书</p>
                         </div>
                         <div class="strength-card">
-                            <img src="/images/cert5.jpg" alt="资质证书5">
+                            <img src="/images/cert-h7.jpg" alt="营业执照">
+                            <p>营业执照</p>
+                        </div>
+                        <div class="strength-card">
+                            <img src="/images/cert-h8.jpg" alt="中国著名品牌证书">
+                            <p>中国著名品牌证书</p>
+                        </div>
+                        <div class="strength-card">
+                            <img src="/images/cert-h9.jpg" alt="高新技术企业证书">
+                            <p>高新技术企业证书</p>
+                        </div>
+                        <!-- duplicate set for seamless loop -->
+                        <div class="strength-card">
+                            <img src="/images/cert-h1.jpg" alt="中国绿色环保产品">
                             <p>中国绿色环保产品</p>
                         </div>
                         <div class="strength-card">
-                            <img src="/images/cert6.jpg" alt="资质证书6">
-                            <p>政府采购合作单位</p>
+                            <img src="/images/cert-h2.jpg" alt="江西名牌产品证书">
+                            <p>江西名牌产品证书</p>
+                        </div>
+                        <div class="strength-card">
+                            <img src="/images/cert-h3.jpg" alt="绿色供应链评价证书">
+                            <p>绿色供应链评价证书</p>
+                        </div>
+                        <div class="strength-card">
+                            <img src="/images/cert-h4.jpg" alt="中国图书馆协会企业单位会员">
+                            <p>中国图书馆协会企业单位会员</p>
+                        </div>
+                        <div class="strength-card">
+                            <img src="/images/cert-h5.jpg" alt="国家档案局定点生产企业认证">
+                            <p>国家档案局定点生产企业认证</p>
+                        </div>
+                        <div class="strength-card">
+                            <img src="/images/cert-h6.jpg" alt="企业信用等级证书">
+                            <p>企业信用等级证书</p>
+                        </div>
+                        <div class="strength-card">
+                            <img src="/images/cert-h7.jpg" alt="营业执照">
+                            <p>营业执照</p>
+                        </div>
+                        <div class="strength-card">
+                            <img src="/images/cert-h8.jpg" alt="中国著名品牌证书">
+                            <p>中国著名品牌证书</p>
+                        </div>
+                        <div class="strength-card">
+                            <img src="/images/cert-h9.jpg" alt="高新技术企业证书">
+                            <p>高新技术企业证书</p>
                         </div>
                     </div>
                     <div class="strength-track row2">
                         <div class="strength-card">
-                            <img src="/images/cert7.jpg" alt="资质证书7">
-                            <p>资质证书7</p>
+                            <img src="/images/cert-v1.jpg" alt="能源管理体系认证证书">
+                            <p>能源管理体系认证证书</p>
                         </div>
                         <div class="strength-card">
-                            <img src="/images/cert8.jpg" alt="资质证书8">
-                            <p>资质证书8</p>
+                            <img src="/images/cert-v2.jpg" alt="环境管理体系认证证书">
+                            <p>环境管理体系认证证书</p>
                         </div>
                         <div class="strength-card">
-                            <img src="/images/cert9.jpg" alt="资质证书9">
-                            <p>资质证书9</p>
+                            <img src="/images/cert-v3.jpg" alt="质量管理体系认证证书">
+                            <p>质量管理体系认证证书</p>
                         </div>
                         <div class="strength-card">
-                            <img src="/images/cert10.jpg" alt="资质证书10">
-                            <p>资质证书10</p>
+                            <img src="/images/cert-v4.jpg" alt="职业健康安全管理体系认证证书">
+                            <p>职业健康安全管理体系认证证书</p>
                         </div>
                         <div class="strength-card">
-                            <img src="/images/cert11.jpg" alt="资质证书11">
-                            <p>资质证书11</p>
+                            <img src="/images/cert-v5.jpg" alt="\"守合同重信用\"企业公示证明">
+                            <p>"守合同重信用"企业公示证明</p>
                         </div>
                         <div class="strength-card">
-                            <img src="/images/cert12.jpg" alt="资质证书12">
-                            <p>资质证书12</p>
+                            <img src="/images/cert-v6.jpg" alt="江西省守合同重信用公示证明">
+                            <p>江西省守合同重信用公示证明</p>
                         </div>
                         <div class="strength-card">
-                            <img src="/images/cert7.jpg" alt="资质证书7">
-                            <p>资质证书7</p>
+                            <img src="/images/cert-v7.jpg" alt="中国环境标志产品认证证书">
+                            <p>中国环境标志产品认证证书</p>
                         </div>
                         <div class="strength-card">
-                            <img src="/images/cert8.jpg" alt="资质证书8">
-                            <p>资质证书8</p>
+                            <img src="/images/cert-v8.jpg" alt="两化融合管理体系评定证书">
+                            <p>两化融合管理体系评定证书</p>
                         </div>
                         <div class="strength-card">
-                            <img src="/images/cert9.jpg" alt="资质证书9">
-                            <p>资质证书9</p>
+                            <img src="/images/cert-v9.jpg" alt="中共中央直属机关采购中心入围通知书">
+                            <p>中共中央直属机关采购中心入围通知书</p>
                         </div>
                         <div class="strength-card">
-                            <img src="/images/cert10.jpg" alt="资质证书10">
-                            <p>资质证书10</p>
+                            <img src="/images/cert-v10.jpg" alt="中央国家机关政府采购中心中标通知书">
+                            <p>中央国家机关政府采购中心中标通知书</p>
                         </div>
                         <div class="strength-card">
-                            <img src="/images/cert11.jpg" alt="资质证书11">
-                            <p>资质证书11</p>
+                            <img src="/images/cert-v11.jpg" alt="中国公共安全产品认证证书">
+                            <p>中国公共安全产品认证证书</p>
                         </div>
                         <div class="strength-card">
-                            <img src="/images/cert12.jpg" alt="资质证书12">
-                            <p>资质证书12</p>
+                            <img src="/images/cert-v12.jpg" alt="中国公共安全产品认证证书">
+                            <p>中国公共安全产品认证证书</p>
+                        </div>
+                        <!-- duplicate set for seamless loop -->
+                        <div class="strength-card">
+                            <img src="/images/cert-v1.jpg" alt="能源管理体系认证证书">
+                            <p>能源管理体系认证证书</p>
+                        </div>
+                        <div class="strength-card">
+                            <img src="/images/cert-v2.jpg" alt="环境管理体系认证证书">
+                            <p>环境管理体系认证证书</p>
+                        </div>
+                        <div class="strength-card">
+                            <img src="/images/cert-v3.jpg" alt="质量管理体系认证证书">
+                            <p>质量管理体系认证证书</p>
+                        </div>
+                        <div class="strength-card">
+                            <img src="/images/cert-v4.jpg" alt="职业健康安全管理体系认证证书">
+                            <p>职业健康安全管理体系认证证书</p>
+                        </div>
+                        <div class="strength-card">
+                            <img src="/images/cert-v5.jpg" alt="\"守合同重信用\"企业公示证明">
+                            <p>"守合同重信用"企业公示证明</p>
+                        </div>
+                        <div class="strength-card">
+                            <img src="/images/cert-v6.jpg" alt="江西省守合同重信用公示证明">
+                            <p>江西省守合同重信用公示证明</p>
+                        </div>
+                        <div class="strength-card">
+                            <img src="/images/cert-v7.jpg" alt="中国环境标志产品认证证书">
+                            <p>中国环境标志产品认证证书</p>
+                        </div>
+                        <div class="strength-card">
+                            <img src="/images/cert-v8.jpg" alt="两化融合管理体系评定证书">
+                            <p>两化融合管理体系评定证书</p>
+                        </div>
+                        <div class="strength-card">
+                            <img src="/images/cert-v9.jpg" alt="中共中央直属机关采购中心入围通知书">
+                            <p>中共中央直属机关采购中心入围通知书</p>
+                        </div>
+                        <div class="strength-card">
+                            <img src="/images/cert-v10.jpg" alt="中央国家机关政府采购中心中标通知书">
+                            <p>中央国家机关政府采购中心中标通知书</p>
+                        </div>
+                        <div class="strength-card">
+                            <img src="/images/cert-v11.jpg" alt="中国公共安全产品认证证书">
+                            <p>中国公共安全产品认证证书</p>
+                        </div>
+                        <div class="strength-card">
+                            <img src="/images/cert-v12.jpg" alt="中国公共安全产品认证证书">
+                            <p>中国公共安全产品认证证书</p>
                         </div>
                     </div>
                 </div>
@@ -884,61 +985,190 @@
                 <h2>工程案例</h2>
                 <p>合作遍布全国 服务各行业客户</p>
             </div>
-            <div class="case-marquee">
-                <div class="case-track">
-                <div class="case-card">
-                    <img src="/images/case1.jpg" alt="深圳国家开发银行">
-                    <p>深圳国家开发银行-智能/手动密集架项目</p>
+            <div class="case-list">
+                <div class="province">
+                    <h3>北京</h3>
+                    <ul>
+                        <li>北京大学</li>
+                        <li>中国邮电大学</li>
+                        <li>北京控制研究所</li>
+                    </ul>
                 </div>
-                <div class="case-card">
-                    <img src="/images/case2.jpg" alt="香港中文大学（深圳）">
-                    <p>香港中文大学（深圳）-智能密集架项目</p>
+                <div class="province">
+                    <h3>上海</h3>
+                    <ul>
+                        <li>上海浦东新区档案局</li>
+                        <li>上海城建职业学院</li>
+                        <li>上海青浦区中心医院</li>
+                        <li>上海城建职业学院</li>
+                        <li>上海食品科技学校</li>
+                        <li>上海大学</li>
+                    </ul>
                 </div>
-                <div class="case-card">
-                    <img src="/images/case3.jpg" alt="珠海香洲区档案局">
-                    <p>珠海香洲区档案局-战备密集架项目</p>
+                <div class="province">
+                    <h3>广东</h3>
+                    <ul>
+                        <li>中山大学</li>
+                        <li>香港中文大学深圳校区</li>
+                        <li>深圳市公安局警务保障部</li>
+                        <li>深圳市华侨城中学</li>
+                        <li>莫斯科大学深圳校区</li>
+                        <li>珠海市香洲区档案局</li>
+                        <li>珠海市金湾区图书馆</li>
+                        <li>惠州市公安局</li>
+                    </ul>
                 </div>
-                <div class="case-card">
-                    <img src="/images/case4.jpg" alt="吉林财经大学">
-                    <p>吉林财经大学-智能密集架项目</p>
+                <div class="province">
+                    <h3>安徽</h3>
+                    <ul>
+                        <li>滁州市图书馆</li>
+                        <li>亳州市档案局</li>
+                        <li>安徽中医药大学</li>
+                        <li>马鞍山市档案资源管理中心</li>
+                    </ul>
                 </div>
-                <div class="case-card">
-                    <img src="/images/case5.jpg" alt="广西大学">
-                    <p>广西大学-图书馆设备及密集架项目</p>
+                <div class="province">
+                    <h3>福建</h3>
+                    <ul>
+                        <li>闽侯县公安消防大队</li>
+                        <li>中国人民解放军南京军区福州总医院</li>
+                        <li>福州市鼓楼区人力资源和社会保障局软件园</li>
+                        <li>邵武市公安局</li>
+                    </ul>
                 </div>
-                <div class="case-card">
-                    <img src="/images/case6.jpg" alt="深圳地铁运营集团">
-                    <p>深圳地铁运营集团-档案密集架项目</p>
+                <div class="province">
+                    <h3>甘肃</h3>
+                    <ul>
+                        <li>秦安县公安局交通警察大队</li>
+                        <li>临夏市人民医院</li>
+                        <li>庆阳市人力资源和社会保障局</li>
+                        <li>甘肃政法学院图书馆</li>
+                        <li>宁县房地产管理局保障住房档案室</li>
+                    </ul>
                 </div>
-                <!-- duplicate for seamless loop -->
-                <div class="case-card">
-                    <img src="/images/case1.jpg" alt="深圳国家开发银行">
-                    <p>深圳国家开发银行-智能/手动密集架项目</p>
+                <div class="province">
+                    <h3>广西</h3>
+                    <ul>
+                        <li>广西大学</li>
+                        <li>百色市国土资源局</li>
+                        <li>柳州市档案局</li>
+                        <li>河池市档案局</li>
+                    </ul>
                 </div>
-                <div class="case-card">
-                    <img src="/images/case2.jpg" alt="香港中文大学（深圳）">
-                    <p>香港中文大学（深圳）-智能密集架项目</p>
+                <div class="province">
+                    <h3>贵州</h3>
+                    <ul>
+                        <li>贵州省档案馆</li>
+                        <li>贵州大学</li>
+                        <li>贵州省监狱</li>
+                    </ul>
                 </div>
-                <div class="case-card">
-                    <img src="/images/case3.jpg" alt="珠海香洲区档案局">
-                    <p>珠海香洲区档案局-战备密集架项目</p>
+                <div class="province">
+                    <h3>河北</h3>
+                    <ul>
+                        <li>河北大学</li>
+                        <li>河北省档案馆</li>
+                        <li>河北省图书馆</li>
+                    </ul>
                 </div>
-                <div class="case-card">
-                    <img src="/images/case4.jpg" alt="吉林财经大学">
-                    <p>吉林财经大学-智能密集架项目</p>
+                <div class="province">
+                    <h3>河南</h3>
+                    <ul>
+                        <li>河南省档案馆</li>
+                        <li>河南省图书馆</li>
+                    </ul>
                 </div>
-                <div class="case-card">
-                    <img src="/images/case5.jpg" alt="广西大学">
-                    <p>广西大学-图书馆设备及密集架项目</p>
+                <div class="province">
+                    <h3>黑龙江</h3>
+                    <ul>
+                        <li>鸡西市中级人民法院</li>
+                        <li>齐齐哈尔市不动产登记中心</li>
+                        <li>哈尔滨工业大学</li>
+                        <li>哈尔滨师范大学</li>
+                    </ul>
                 </div>
-                <div class="case-card">
-                    <img src="/images/case6.jpg" alt="深圳地铁运营集团">
-                    <p>深圳地铁运营集团-档案密集架项目</p>
+                <div class="province">
+                    <h3>湖北</h3>
+                    <ul>
+                        <li>武汉大学</li>
+                        <li>恩施市档案馆</li>
+                        <li>中共湖北省委党校（湖北省行政学院）</li>
+                        <li>湖北中医药高等专科学校</li>
+                    </ul>
                 </div>
+                <div class="province">
+                    <h3>湖南</h3>
+                    <ul>
+                        <li>湖南省档案馆</li>
+                        <li>湖南省图书馆</li>
+                        <li>长沙市档案馆</li>
+                        <li>长沙市图书馆</li>
+                    </ul>
                 </div>
-            </div>
-            <div class="case-overview">
-                <img src="/images/cases-overview.jpg" alt="工程案例总览大图">
+                <div class="province">
+                    <h3>吉林</h3>
+                    <ul>
+                        <li>吉林市城市建设档案馆</li>
+                        <li>长春市城市建设档案馆</li>
+                        <li>松原市图书馆</li>
+                    </ul>
+                </div>
+                <div class="province">
+                    <h3>江苏</h3>
+                    <ul>
+                        <li>无锡地铁集团</li>
+                        <li>江苏银行泰州分行</li>
+                        <li>海军指挥学院供应保障处</li>
+                        <li>兴化市住房和城乡建设局</li>
+                        <li>南通市档案馆</li>
+                        <li>南通市图书馆</li>
+                    </ul>
+                </div>
+                <div class="province">
+                    <h3>江西</h3>
+                    <ul>
+                        <li>江西省图书馆</li>
+                        <li>江西财经大学</li>
+                        <li>江西农业大学</li>
+                        <li>井冈山大学</li>
+                        <li>江西省档案馆</li>
+                    </ul>
+                </div>
+                <div class="province">
+                    <h3>辽宁</h3>
+                    <ul>
+                        <li>辽宁省生态环境厅</li>
+                        <li>辽宁经济管理干部学院</li>
+                        <li>沈阳工业大学</li>
+                        <li>中国刑事警察学院</li>
+                        <li>鲁迅美术学院</li>
+                    </ul>
+                </div>
+                <div class="province">
+                    <h3>内蒙古</h3>
+                    <ul>
+                        <li>内蒙古自治区公共资源交易管理服务中心</li>
+                        <li>内蒙古师范大学</li>
+                        <li>赤峰市元宝山区档案局</li>
+                    </ul>
+                </div>
+                <div class="province">
+                    <h3>青海</h3>
+                    <ul>
+                        <li>海西自治州民族博物馆</li>
+                        <li>青海师范大学图书馆</li>
+                        <li>青海省心脑血管病专科医院</li>
+                        <li>青藏铁路公安局</li>
+                    </ul>
+                </div>
+                <div class="province">
+                    <h3>山东</h3>
+                    <ul>
+                        <li>青岛地铁</li>
+                        <li>淄博市公安局交通警察支队</li>
+                        <li>东营职业学院</li>
+                    </ul>
+                </div>
             </div>
         </div>
     </section>
@@ -1038,6 +1268,36 @@
             }
             var sMarquee = document.querySelector('.strength-marquee');
             var sTracks = document.querySelectorAll('.strength-track');
+            // ensure each track has at least one duplicated sequence for seamless scroll
+            sTracks.forEach(function(track){
+                var scrollRight = track.classList.contains('row2');
+                var original = Array.from(track.children);
+                if (original.length) {
+                    // clone the original set once
+                    if (scrollRight) {
+                        // when scrolling right, insert in reverse order so sequence remains forward
+                        original.slice().reverse().forEach(function(ch){
+                            track.insertBefore(ch.cloneNode(true), track.firstChild);
+                        });
+                    } else {
+                        original.forEach(function(ch){
+                            track.appendChild(ch.cloneNode(true));
+                        });
+                    }
+                }
+                // then optionally keep adding until wide enough
+                var width = track.scrollWidth;
+                var parentW = track.closest('.strength-marquee')?.clientWidth || 0;
+                while (track.scrollWidth < parentW * 2) {
+                    original.forEach(function(ch){
+                        var copy = ch.cloneNode(true);
+                        if (scrollRight) track.insertBefore(copy, track.firstChild);
+                        else track.appendChild(copy);
+                    });
+                    if (track.scrollWidth === width) break;
+                    width = track.scrollWidth;
+                }
+            });
             if (sMarquee && sTracks.length) {
                 var setPlayState = function(state){ sTracks.forEach(function(t){ t.style.animationPlayState = state; }); };
                 sMarquee.addEventListener('mouseenter', function(){ setPlayState('paused'); });
