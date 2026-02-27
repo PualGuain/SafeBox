@@ -356,17 +356,15 @@
             position: relative;
         }
         .strength-track {
-            display: flex;
+            display: grid;
             gap: 16px;
-            will-change: transform;
-            /* animation applied per-row so that each can scroll independently */
+            will-change: auto;
         }
         .strength-track.row1 {
-            animation: strength-scroll-left1 28s linear infinite;
+            grid-template-columns: repeat(3, 1fr);
         }
         .strength-track.row2 {
-            /* move rightwards by animating positive translation */
-            animation: strength-scroll-right 30s linear infinite;
+            grid-template-columns: repeat(3, 1fr);
         }
         @keyframes strength-scroll-left1 {
             0% { transform: translateX(0); }
@@ -382,7 +380,7 @@
             gap: 16px;
         }
         .strength-marquee:hover .strength-track {
-            animation-play-state: paused;
+            /* no-op: animations already disabled */
         }
         @keyframes strength-scroll-left {
             0% { transform: translateX(0%); }
@@ -591,47 +589,27 @@
             }
         }
         @media (max-width: 768px) {
-            .nav {
-                flex-direction: column;
-                gap: 15px;
-            }
-            .banner {
-                height: 480px;
-            }
-            .banner h1 {
-                font-size: 36px;
-            }
-            .banner p {
-                font-size: 18px;
-            }
-            .product-grid, .solution-list {
-                grid-template-columns: 1fr;
-            }
-            .service-list {
-                flex-direction: column;
-                gap: 30px;
-            }
-            .service-item {
-                width: 100%;
-            }
-            .strength-track {
-                animation-duration: 40s;
+            .strength-track.row1 {
+                grid-template-columns: repeat(2, 1fr);
                 gap: 12px;
-                animation: none;              /* disable marquee on small screens */
-                flex-wrap: wrap;
-                justify-content: center;
             }
-            .strength-card { min-width: 140px; margin: 4px; }
+            .strength-track.row2 {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+            .strength-track.row1 .strength-card,
+            .strength-track.row2 .strength-card {
+                min-width: auto !important;
+            }
             .strength-track.row1 .strength-card img,
             .strength-track.row2 .strength-card img {
-                width: 100px;
-                height: 120px;
+                width: 100%;
+                height: 80px;
             }
-            .case-track {
-                animation-duration: 45s;
-                gap: 12px;
+            .strength-card p {
+                padding: 8px;
+                font-size: 12px;
             }
-            .case-card { min-width: 240px; }
         }
         .modal-overlay {
             position: fixed;
@@ -845,94 +823,8 @@
                             <img src="/images/cert-h9.jpg" alt="高新技术企业证书">
                             <p>高新技术企业证书</p>
                         </div>
-                        <!-- duplicate set for seamless loop -->
-                        <div class="strength-card">
-                            <img src="/images/cert-h1.jpg" alt="中国绿色环保产品">
-                            <p>中国绿色环保产品</p>
-                        </div>
-                        <div class="strength-card">
-                            <img src="/images/cert-h2.jpg" alt="江西名牌产品证书">
-                            <p>江西名牌产品证书</p>
-                        </div>
-                        <div class="strength-card">
-                            <img src="/images/cert-h3.jpg" alt="绿色供应链评价证书">
-                            <p>绿色供应链评价证书</p>
-                        </div>
-                        <div class="strength-card">
-                            <img src="/images/cert-h4.jpg" alt="中国图书馆协会企业单位会员">
-                            <p>中国图书馆协会企业单位会员</p>
-                        </div>
-                        <div class="strength-card">
-                            <img src="/images/cert-h5.jpg" alt="国家档案局定点生产企业认证">
-                            <p>国家档案局定点生产企业认证</p>
-                        </div>
-                        <div class="strength-card">
-                            <img src="/images/cert-h6.jpg" alt="企业信用等级证书">
-                            <p>企业信用等级证书</p>
-                        </div>
-                        <div class="strength-card">
-                            <img src="/images/cert-h7.jpg" alt="营业执照">
-                            <p>营业执照</p>
-                        </div>
-                        <div class="strength-card">
-                            <img src="/images/cert-h8.jpg" alt="中国著名品牌证书">
-                            <p>中国著名品牌证书</p>
-                        </div>
-                        <div class="strength-card">
-                            <img src="/images/cert-h9.jpg" alt="高新技术企业证书">
-                            <p>高新技术企业证书</p>
-                        </div>
                     </div>
                     <div class="strength-track row2">
-                        <div class="strength-card">
-                            <img src="/images/cert-v1.jpg" alt="能源管理体系认证证书">
-                            <p>能源管理体系认证证书</p>
-                        </div>
-                        <div class="strength-card">
-                            <img src="/images/cert-v2.jpg" alt="环境管理体系认证证书">
-                            <p>环境管理体系认证证书</p>
-                        </div>
-                        <div class="strength-card">
-                            <img src="/images/cert-v3.jpg" alt="质量管理体系认证证书">
-                            <p>质量管理体系认证证书</p>
-                        </div>
-                        <div class="strength-card">
-                            <img src="/images/cert-v4.jpg" alt="职业健康安全管理体系认证证书">
-                            <p>职业健康安全管理体系认证证书</p>
-                        </div>
-                        <div class="strength-card">
-                            <img src="/images/cert-v5.jpg" alt="\"守合同重信用\"企业公示证明">
-                            <p>"守合同重信用"企业公示证明</p>
-                        </div>
-                        <div class="strength-card">
-                            <img src="/images/cert-v6.jpg" alt="江西省守合同重信用公示证明">
-                            <p>江西省守合同重信用公示证明</p>
-                        </div>
-                        <div class="strength-card">
-                            <img src="/images/cert-v7.jpg" alt="中国环境标志产品认证证书">
-                            <p>中国环境标志产品认证证书</p>
-                        </div>
-                        <div class="strength-card">
-                            <img src="/images/cert-v8.jpg" alt="两化融合管理体系评定证书">
-                            <p>两化融合管理体系评定证书</p>
-                        </div>
-                        <div class="strength-card">
-                            <img src="/images/cert-v9.jpg" alt="中共中央直属机关采购中心入围通知书">
-                            <p>中共中央直属机关采购中心入围通知书</p>
-                        </div>
-                        <div class="strength-card">
-                            <img src="/images/cert-v10.jpg" alt="中央国家机关政府采购中心中标通知书">
-                            <p>中央国家机关政府采购中心中标通知书</p>
-                        </div>
-                        <div class="strength-card">
-                            <img src="/images/cert-v11.jpg" alt="中国公共安全产品认证证书">
-                            <p>中国公共安全产品认证证书</p>
-                        </div>
-                        <div class="strength-card">
-                            <img src="/images/cert-v12.jpg" alt="中国公共安全产品认证证书">
-                            <p>中国公共安全产品认证证书</p>
-                        </div>
-                        <!-- duplicate set for seamless loop -->
                         <div class="strength-card">
                             <img src="/images/cert-v1.jpg" alt="能源管理体系认证证书">
                             <p>能源管理体系认证证书</p>
@@ -1274,45 +1166,7 @@
                 marquee.addEventListener('touchstart', function(){ track.style.animationPlayState = 'paused'; }, { passive: true });
                 marquee.addEventListener('touchend', function(){ track.style.animationPlayState = 'running'; });
             }
-            var sMarquee = document.querySelector('.strength-marquee');
-            var sTracks = document.querySelectorAll('.strength-track');
-            // ensure each track has at least one duplicated sequence for seamless scroll
-            sTracks.forEach(function(track){
-                var scrollRight = track.classList.contains('row2');
-                var original = Array.from(track.children);
-                if (original.length) {
-                    // clone the original set once
-                    if (scrollRight) {
-                        // when scrolling right, insert in reverse order so sequence remains forward
-                        original.slice().reverse().forEach(function(ch){
-                            track.insertBefore(ch.cloneNode(true), track.firstChild);
-                        });
-                    } else {
-                        original.forEach(function(ch){
-                            track.appendChild(ch.cloneNode(true));
-                        });
-                    }
-                }
-                // then optionally keep adding until wide enough
-                var width = track.scrollWidth;
-                var parentW = track.closest('.strength-marquee')?.clientWidth || 0;
-                while (track.scrollWidth < parentW * 2) {
-                    original.forEach(function(ch){
-                        var copy = ch.cloneNode(true);
-                        if (scrollRight) track.insertBefore(copy, track.firstChild);
-                        else track.appendChild(copy);
-                    });
-                    if (track.scrollWidth === width) break;
-                    width = track.scrollWidth;
-                }
-            });
-            if (sMarquee && sTracks.length) {
-                var setPlayState = function(state){ sTracks.forEach(function(t){ t.style.animationPlayState = state; }); };
-                sMarquee.addEventListener('mouseenter', function(){ setPlayState('paused'); });
-                sMarquee.addEventListener('mouseleave', function(){ setPlayState('running'); });
-                sMarquee.addEventListener('touchstart', function(){ setPlayState('paused'); }, { passive: true });
-                sMarquee.addEventListener('touchend', function(){ setPlayState('running'); });
-            }
+            // strength tracks are now static grid layouts - no animation logic needed
             var catBtns = document.querySelectorAll('.category-btn');
             var grids = document.querySelectorAll('.product-grid');
             var titleEl = document.getElementById('productTitle');
