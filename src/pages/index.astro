@@ -617,8 +617,16 @@
             .strength-track {
                 animation-duration: 40s;
                 gap: 12px;
+                animation: none;              /* disable marquee on small screens */
+                flex-wrap: wrap;
+                justify-content: center;
             }
-            .strength-card { min-width: 200px; }
+            .strength-card { min-width: 140px; margin: 4px; }
+            .strength-track.row1 .strength-card img,
+            .strength-track.row2 .strength-card img {
+                width: 100px;
+                height: 120px;
+            }
             .case-track {
                 animation-duration: 45s;
                 gap: 12px;
