@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Sitemap: https://jxydcp.top/sitemap.xml
+Host: jxydcp.top
