@@ -7,8 +7,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>江西远大保险设备-智能密集架_手动密集架_战备密集架专业生产厂家</title>
-    <meta name="keywords" content="密集架,智能密集架,手动密集架,战备密集架,无轨密集架,密集架厂家">
-    <meta name="description" content="江西远大保险设备实业集团，国家高新技术企业，专业生产智能/手动/战备/无轨密集架，国家档案局定点生产企业，提供智慧档案馆整体解决方案，全国售后保障，咨询电话：0795-7861271">
+    <meta name="keywords" content="密集架,智能密集架,手动密集架,战备密集架,无轨密集架,密集架厂家,密集架制造商,定制密集架,全国密集架">
+    <meta name="description" content="江西远大保险设备实业集团，国家高新技术企业，专业生产智能/手动/战备/无轨密集架，定制密集架服务，全国范围发货与安装，国家档案局定点生产企业，提供智慧档案馆整体解决方案，全国售后保障，咨询电话：0795-7861271">
         <link rel="canonical" href="https://jxydcp.top/">
         <meta name="robots" content="index,follow">
         <!-- Open Graph / Facebook -->
@@ -30,7 +30,8 @@
             "name": "江西远大保险设备实业集团",
             "url": "https://jxydcp.top/",
             "logo": "https://jxydcp.top/images/logo.png",
-            "sameAs": []
+            "sameAs": [],
+            "keywords": "密集架,密集架厂家,密集架制造商,定制密集架"
         }
         </script>
     <style>
@@ -88,6 +89,36 @@
             display: flex;
             gap: 30px;
         }
+        .hamburger {
+            display: none;
+            font-size: 24px;
+            color: #fff;
+            cursor: pointer;
+        }
+        @media (max-width: 768px) {
+            .nav {
+                flex-wrap: wrap;
+            }
+            .nav-list {
+                flex-direction: column;
+                width: 100%;
+                display: none;
+                background: #22384f;
+                padding: 10px 0;
+            }
+            .nav-list a {
+                padding: 8px 20px;
+                display: block;
+            }
+            .hamburger {
+                display: block;
+            }
+            .contact-tel {
+                width: 100%;
+                text-align: center;
+                margin-top: 8px;
+            }
+        }
         .nav-list a {
             color: #fff;
             font-size: 16px;
@@ -119,6 +150,29 @@
             position: relative;
             display: flex;
             align-items: center;
+        }
+        .product-highlight {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .product-highlight p {
+            display: inline-block;
+            background: rgba(0,180,255,0.9);
+            color: #fff;
+            padding: 14px 26px;
+            border-radius: 32px;
+            font-size: 20px;
+            font-weight: 700;
+            max-width: 90%;
+            box-sizing: border-box;
+        }
+        @media (max-width:768px) {
+            .product-highlight p {
+                font-size:16px;
+                padding:10px 18px;
+                width: auto;
+                max-width: 100%;
+            }
         }
         .banner-mask {
             position: absolute;
@@ -731,6 +785,7 @@
                     <p>主营密集架、图书架、文件柜、金库门等金属家具，及档案库房环境监测系统、智慧档案馆解决方案等，产品广泛应用于档案局、院校、银行、企事业单位、军队等领域，致力于成为中国金属家具企业中最受尊重和信赖的企业之一。</p>
                 </div>
             </div>
+            
         </div>
     </section>
 
@@ -739,6 +794,9 @@
             <div class="title">
                 <h2 id="productTitle">核心产品 - 档案装具</h2>
                 <p>全系列密集架 满足不同场景存储需求</p>
+            </div>
+            <div class="product-highlight">
+                <p>免费定制・一对一服务・全国可飞 —— 专业密集架厂家</p>
             </div>
             <div class="product-categories">
                 <button class="category-btn active" data-category="archives">档案装具</button>
@@ -1142,12 +1200,7 @@
         </div>
     </section>
 
-    <footer class="footer">
-        <div class="container">
-            <p>© 2025 江西远大保险设备实业集团有限公司 版权所有 | 树远大理想·创百汇品牌</p>
-            <p>本网站由授权代理商运营，非远大集团官方网站；所涉商标与图文归其权利人所有，仅作展示与咨询之用。如有版权疑义请联系删除。<a href="http://www.jxydsyjt.cn/" target="_blank" rel="noopener noreferrer">官方网站</a> | <a href="/privacy.html">隐私政策</a></p>
-        </div>
-    </footer>
+    
     <div class="modal-overlay" id="modal">
         <div class="modal">
             <button class="close" id="modalClose">×</button>
@@ -1226,6 +1279,15 @@
             showCategory('archives');
             updateTitle('archives');
             var consultBtn = document.querySelector('.banner-btn');
+            var hamburger = document.getElementById('hamburger');
+            var navList = document.getElementById('navList');
+            if (hamburger && navList) {
+                hamburger.addEventListener('click', function(){
+                    var isVisible = navList.style.display === 'flex' || navList.style.display === 'block';
+                    navList.style.display = isVisible ? 'none' : 'flex';
+                });
+            }
+
             if (consultBtn) {
                 consultBtn.addEventListener('click', function(e){
                     e.preventDefault();
